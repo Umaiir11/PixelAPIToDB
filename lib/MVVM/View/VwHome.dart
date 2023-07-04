@@ -66,6 +66,16 @@ class _VwHomeState extends State<VwHome> {
                     },
                     child: const Text("Ftech Images!")),
               ),
+              SizedBox(height: PrHeight*0.02 ,),
+              Center(
+                child: ElevatedButton(
+                    onPressed: () {
+                      l_VmHome.BTNFetch();
+
+                      Get.toNamed(AppRoutes.VwDBData);
+                    },
+                    child: const Text("DB Images!")),
+              ),
 
             ],
           ),

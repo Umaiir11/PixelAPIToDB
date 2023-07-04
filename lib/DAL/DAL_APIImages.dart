@@ -28,24 +28,24 @@ class DAL_APIImage extends GetxController {
   }
 
 
-  Future<List<Modimamge>> Fnc_Read() async {
+  Future<List<ModDBImage>> Fnc_Read() async {
     try {
       Database? lDatabase = await DBHelper().FncGetDatabaseIns();
 
-      String lQuery = "SELECT DISTINCT Image FROM VW_TBU_Image";
+      String lQuery = "SELECT DISTINCT Image FROM VW_TBU_ApiImage";
 
       List<Map<String, dynamic>> lFetchedData = await lDatabase!.rawQuery(lQuery);
 
-      List<Modimamge> lTest = [];
+      List<ModDBImage> lTest = [];
       for (var map in lFetchedData) {
         String image = map['Image'];
 
         // Check if the image already exists in the list
-        bool isDuplicate = lTest.any((item) => item.Pr_Image == image);
+        bool isDuplicate = lTest.any((item) => item.Pr_listImages == image);
 
         if (!isDuplicate) {
-          Modimamge lModimamge = Modimamge(Pr_Image: image);
-          lTest.add(lModimamge);
+          ModDBImage lModDBImage = ModDBImage(Pr_listImages: image);
+          lTest.add(lModDBImage);
         }
       }
 
