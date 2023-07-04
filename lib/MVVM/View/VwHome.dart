@@ -21,6 +21,7 @@ class _VwHomeState extends State<VwHome> {
     // TODO: implement initState
     super.initState();
     DBHelper().FncCreateDataBase();
+    l_VmHome.Sb_ResetForm();
 
   }
   Widget build(BuildContext context) {
@@ -51,13 +52,20 @@ class _VwHomeState extends State<VwHome> {
               Center(
                 child: ElevatedButton(
                     onPressed: () {
-                      l_VmHome.Fnc_ImagesAPICall();
-                      //Get.toNamed(AppRoutes.VwImage);
-                      Get.toNamed(AppRoutes.VwApiImage);
+                      Get.toNamed(AppRoutes.VwImage);
                     },
                     child: const Text("Upload Image!")),
               ),
               SizedBox(height: PrHeight*0.02 ,),
+              Center(
+                child: ElevatedButton(
+                    onPressed: () {
+                      l_VmHome.Fnc_CUD();
+
+                     // Get.toNamed(AppRoutes.VwApiImage);
+                    },
+                    child: const Text("Ftech Images!")),
+              ),
 
             ],
           ),

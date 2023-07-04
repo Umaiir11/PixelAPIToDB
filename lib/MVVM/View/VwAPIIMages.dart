@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -20,14 +23,14 @@ class VwApiImages extends StatelessWidget {
           final item = controller.l_memoryImages![lListindex];
 
 
+
+
           return    Container(
             width: 190,
             height: 120,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              image: DecorationImage(
-                image: item,
-              ),
+
             ),
           );
         },

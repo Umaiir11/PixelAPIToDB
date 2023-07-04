@@ -9,7 +9,16 @@ class SchemaQuery {
         ISD TEXT
        )
     ''');
+    await lDatabase.execute('''
+      CREATE TABLE IF NOT EXISTS TBU_ApiImage (
+        Image TEXT,
+        ISD TEXT
+       )
+    ''');
+
+
     await FncCreateView(lDatabase, 'TBU_Image');
+    await FncCreateView(lDatabase, 'TBU_ApiImage');
   }
 
   Future<void> FncCheckAndAddColumns(Database lDatabase, String lTablename, Map<String, String> lColumnstoadd) async {
@@ -33,5 +42,7 @@ class SchemaQuery {
       SELECT *
       FROM $lTablename Where ISD = 'false'
     ''');
+
+
   }
 }
