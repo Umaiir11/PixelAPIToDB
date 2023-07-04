@@ -140,11 +140,4 @@ class VmImage extends GetxController {
   }
 
 
-  Future<void> Fnc_ImagesAPICall() async {
-    List<Photo>? l_listImages =
-    new List<Photo>.empty(growable: true);
-    l_listImages = await Sl_ImagesList().Fnc_Images();
-    print(l_listImages);
-    print(l_listImages);
-  }
 }

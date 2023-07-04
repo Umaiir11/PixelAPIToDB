@@ -53,6 +53,7 @@ class _VwHomeState extends State<VwHome> {
                     onPressed: () {
                       l_VmHome.Fnc_ImagesAPICall();
                       //Get.toNamed(AppRoutes.VwImage);
+                      Get.toNamed(AppRoutes.VwApiImage);
                     },
                     child: const Text("Upload Image!")),
               ),

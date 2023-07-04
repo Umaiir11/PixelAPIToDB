@@ -1,24 +1,39 @@
-import 'dart:convert';
-import 'dart:io';
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter_native_image/flutter_native_image.dart';
+import 'dart:typed_data';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_list/MVVM/Model/ApiModel/ModImage.dart';
-import 'package:image_list/ServiceLayer/Sl_Images.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart' as path;
-import 'package:permission_handler/permission_handler.dart';
-import '../../DAL/DAL_Image.dart';
-import '../Model/ModImages.dart';
+import 'package:http/http.dart' as http;
 
+import '../../ServiceLayer/Sl_Images.dart';
+import '../Model/ApiModel/ModImage.dart';
 
 class VmHome extends GetxController {
+  List<Photo>? l_listImages;
+  RxList<MemoryImage> l_memoryImages = <MemoryImage>[].obs;
 
-  Future<void> Fnc_ImagesAPICall() async {
-    List<Photo>? l_listImages =
-    new List<Photo>.empty(growable: true);
+
+  Fnc_ImagesAPICall() async {
     l_listImages = await Sl_ImagesList().Fnc_Images();
-    print(l_listImages);
-    print(l_listImages);
+    FncImageConversion();
+  }
+
+  FncImageConversion() async {
+    if (l_listImages != null && l_listImages!.isNotEmpty) {
+
+      for (Photo item in l_listImages!) {
+        String? l_tinyImageUrl = item.src?.tiny;
+
+        if (l_tinyImageUrl != null) {
+          final response = await http.get(Uri.parse(l_tinyImageUrl));
+
+          if (response.statusCode == 200) {
+            final Uint8List l_decodedBytes = response.bodyBytes;
+            final MemoryImage l_memoryImage = MemoryImage(l_decodedBytes);
+
+            l_memoryImages?.add(l_memoryImage);
+          }
+        }
+      }
+    }
   }
 }
+
