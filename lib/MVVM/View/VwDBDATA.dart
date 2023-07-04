@@ -7,6 +7,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:image_list/MVVM/ViewModel/VmDBDATA.dart';
 
 import '../ViewModel/VmHome.dart';
+import 'VwImageDetailScreen.dart';
 
 class VwDBData extends StatelessWidget {
   final VmHome l_VmDBData = Get.put(VmHome());
@@ -35,22 +36,30 @@ class VwDBData extends StatelessWidget {
             Uint8List l_DecodedBytes = base64Decode(l_ListImage);
             MemoryImage lMemoryIMage = MemoryImage(l_DecodedBytes);
 
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.3),
-                    blurRadius: 4,
-                    offset: Offset(0, 2),
+            return GestureDetector(
+              onTap: () {
+                // Handle the tap event here
+                Get.to(() => ImageDetailScreen(image: lMemoryIMage));
+
+              },
+
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      blurRadius: 4,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Image(
+                    image: lMemoryIMage,
+                    fit: BoxFit.cover,
                   ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Image(
-                  image: lMemoryIMage,
-                  fit: BoxFit.cover,
                 ),
               ),
             );

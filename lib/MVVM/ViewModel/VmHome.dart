@@ -37,7 +37,7 @@ class VmHome extends GetxController {
 
     if (l_listImages != null && l_listImages!.isNotEmpty) {
       for (Photo item in l_listImages!) {
-        String? l_tinyImageUrl = item.src?.tiny;
+        String? l_tinyImageUrl = item.src?.medium;
 
         if (l_tinyImageUrl != null) {
           final response = await http.get(Uri.parse(l_tinyImageUrl));

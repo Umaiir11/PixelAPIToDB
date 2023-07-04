@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../ViewModel/VmHome.dart';
+import 'VwImageDetailScreen.dart';
 
 class VwApiImages extends StatelessWidget {
   final VmHome controller = Get.put(VmHome());
@@ -38,7 +39,13 @@ class VwApiImages extends StatelessWidget {
           itemBuilder: (context, lListindex) {
             final image = controller.l_memoryImages![lListindex];
 
-            return Container(
+            return GestureDetector(
+            onTap: () {
+              // Handle the tap event here
+              Get.to(() => ImageDetailScreen(image: image));
+
+            },
+            child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
@@ -51,14 +58,20 @@ class VwApiImages extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: Image(
-                  image: image,
-                  fit: BoxFit.cover,
+                child: Hero(
+                  tag: image, // Unique tag for each image
+                  child: Image(
+                    image: image,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
+            ),
             );
+
           },
         );
+
       }
     },
     ),
