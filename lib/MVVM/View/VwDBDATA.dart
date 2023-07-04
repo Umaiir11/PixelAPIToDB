@@ -19,7 +19,10 @@ class VwDBData extends StatelessWidget {
         ),
         body:  Obx(() => GridView.builder(
           shrinkWrap: true,
-          itemCount: l_VmDBData.l_memoryImages!.length,
+          itemCount: l_VmDBData.l_RxListModImage!.length,
+
+
+
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 16,
@@ -56,5 +59,3 @@ class VwDBData extends StatelessWidget {
     );
   }
 }
-
-

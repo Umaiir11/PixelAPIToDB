@@ -62,6 +62,7 @@ class _VwHomeState extends State<VwHome> {
                     onPressed: () {
                       l_VmHome.BTNApiFetchImages();
                       Get.toNamed(AppRoutes.VwApiImage);
+                      l_VmHome.l_memoryImages.clear();
                     },
                     child: const Text("Ftech Images!")),
               ),
