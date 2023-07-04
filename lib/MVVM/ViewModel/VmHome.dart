@@ -16,16 +16,16 @@ import 'dart:convert';
 class VmHome extends GetxController {
   List<Photo>? l_listImages;
   int? G_Operation;
-  RxList<String> l_memoryImages = <String>[].obs;
+  RxList<String> l_Base64Images = <String>[].obs;
   RxList<ModDBImage> l_RxListModImage = <ModDBImage>[].obs;
-
+  RxList<MemoryImage> l_memoryImages = <MemoryImage>[].obs;
 
 
 
   Future<bool>  Fnc_ImagesAPICall() async {
     l_listImages = await Sl_ImagesList().Fnc_Images();
-    l_memoryImages = await FncImageConversion();
-    if(l_memoryImages.isNotEmpty){
+    l_Base64Images = await FncImageConversion();
+    if(l_Base64Images.isNotEmpty){
       return true;
     }
     return false;
@@ -34,6 +34,7 @@ class VmHome extends GetxController {
 
   Future<RxList<String>> FncImageConversion() async {
     RxList<String> l_base64Images = <String>[].obs;
+
     if (l_listImages != null && l_listImages!.isNotEmpty) {
       for (Photo item in l_listImages!) {
         String? l_tinyImageUrl = item.src?.tiny;
@@ -44,6 +45,9 @@ class VmHome extends GetxController {
           if (response.statusCode == 200) {
             final Uint8List l_decodedBytes = response.bodyBytes;
             final String l_base64Image = base64Encode(l_decodedBytes);
+            final MemoryImage l_memoryImage = MemoryImage(l_decodedBytes);
+
+            l_memoryImages.add(l_memoryImage);
 
             l_base64Images.add(l_base64Image);
           }
@@ -57,7 +61,7 @@ class VmHome extends GetxController {
   List<ModDBImage>? Fnc_SetModel_DATA() {
     List<ModDBImage>? lModDBImageList = [];
 
-    for (String image in l_memoryImages) {
+    for (String image in l_Base64Images) {
       ModDBImage l_ModDBImage = ModDBImage();
       l_ModDBImage.Pr_Operation = G_Operation;
       l_ModDBImage.Pr_listImages = image;
@@ -126,7 +130,7 @@ class VmHome extends GetxController {
   }
 
 
-  BTNFetchImages() async {
+  BTNApiFetchImages() async {
     FncPermissions();
     await Fnc_CUD() ;
   }

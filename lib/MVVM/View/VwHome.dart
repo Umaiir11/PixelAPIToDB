@@ -60,9 +60,8 @@ class _VwHomeState extends State<VwHome> {
               Center(
                 child: ElevatedButton(
                     onPressed: () {
-                      l_VmHome.Fnc_CUD();
-
-                     // Get.toNamed(AppRoutes.VwApiImage);
+                      l_VmHome.BTNApiFetchImages();
+                      Get.toNamed(AppRoutes.VwApiImage);
                     },
                     child: const Text("Ftech Images!")),
               ),

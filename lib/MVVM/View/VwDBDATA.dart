@@ -17,25 +17,37 @@ class VwDBData extends StatelessWidget {
         appBar: AppBar(
           title: Text('Image List'),
         ),
-        body:  Obx(() => ListView.builder(
+        body:  Obx(() => GridView.builder(
           shrinkWrap: true,
-          itemCount: l_VmDBData.l_RxListModImage!.length,
+          itemCount: l_VmDBData.l_memoryImages!.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+            childAspectRatio: 0.75,
+          ),
           itemBuilder: (context, lListindex) {
             final item = l_VmDBData.l_RxListModImage[lListindex];
             String l_ListImage = item.Pr_listImages!;
             Uint8List l_DecodedBytes = base64Decode(l_ListImage);
             MemoryImage lMemoryIMage = MemoryImage(l_DecodedBytes);
 
-
-
-
-            return    Container(
-              width: 190,
-              height: 120,
+            return Container(
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    blurRadius: 4,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image(
                   image: lMemoryIMage,
+                  fit: BoxFit.cover,
                 ),
               ),
             );
@@ -44,3 +56,5 @@ class VwDBData extends StatelessWidget {
     );
   }
 }
+
+

@@ -16,25 +16,55 @@ class VwApiImages extends StatelessWidget {
       appBar: AppBar(
         title: Text('Image List'),
       ),
-      body:  Obx(() => ListView.builder(
-        shrinkWrap: true,
-        itemCount: controller.l_memoryImages!.length,
-        itemBuilder: (context, lListindex) {
-          final item = controller.l_memoryImages![lListindex];
+         body: Obx(
+        () {
+      if (controller.l_memoryImages == null) {
+        // Show loading indicator if l_memoryImages is null
+        return Center(child: CircularProgressIndicator());
+      } else if (controller.l_memoryImages!.isEmpty) {
+        // Show empty state if l_memoryImages is empty
+        return Center(child:CircularProgressIndicator());
+      } else {
+        // Display GridView when l_memoryImages has images
+        return GridView.builder(
+          shrinkWrap: true,
+          itemCount: controller.l_memoryImages!.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+            childAspectRatio: 0.75,
+          ),
+          itemBuilder: (context, lListindex) {
+            final image = controller.l_memoryImages![lListindex];
+
+            return Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    blurRadius: 4,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image(
+                  image: image,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            );
+          },
+        );
+      }
+    },
+    ),
 
 
 
-
-          return    Container(
-            width: 190,
-            height: 120,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-
-            ),
-          );
-        },
-      ))
     );
   }
 }
