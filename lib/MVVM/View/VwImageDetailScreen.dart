@@ -8,11 +8,12 @@ class VwImageDetailScreen extends StatelessWidget {
   final List<ImageProvider> l_imagesList;
   final int initialIndex;
 
+  //Constructor that accept these things
   VwImageDetailScreen({required this.l_imagesList, required this.initialIndex, required MemoryImage image});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(VmImageDetailController());
+    final l_VmImageDetailController = Get.put(VmImageDetail());
 
     final PageController pageController = PageController(initialPage: initialIndex);
     int currentIndex = initialIndex;
@@ -23,19 +24,19 @@ class VwImageDetailScreen extends StatelessWidget {
       ),
       body: GestureDetector(
         onDoubleTap: () {
-          if (controller.scale.value == 1.0) {
-            controller.scale.value = 2.0;
+          if (l_VmImageDetailController.scale.value == 1.0) {
+            l_VmImageDetailController.scale.value = 2.0;
           } else {
-            controller.scale.value = 1.0;
+            l_VmImageDetailController.scale.value = 1.0;
           }
         },
         child: Center(
           child: GestureDetector(
             onScaleUpdate: (ScaleUpdateDetails details) {
-              controller.scale.value = controller.initialScale.value * details.scale;
+              l_VmImageDetailController.scale.value = l_VmImageDetailController.initialScale.value * details.scale;
             },
             onScaleEnd: (ScaleEndDetails details) {
-              controller.initialScale.value = controller.scale.value;
+              l_VmImageDetailController.initialScale.value = l_VmImageDetailController.scale.value;
             },
             child: Hero(
               tag: l_imagesList[currentIndex],
@@ -47,7 +48,7 @@ class VwImageDetailScreen extends StatelessWidget {
                 },
                 itemBuilder: (context, index) {
                   return Obx(() => Transform.scale(
-                    scale: controller.scale.value,
+                    scale: l_VmImageDetailController.scale.value,
                     child: Image(
                       image: l_imagesList[index],
                       fit: BoxFit.contain,

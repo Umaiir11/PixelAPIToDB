@@ -52,9 +52,12 @@ class VwDBData extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: Image(
-                  image: lMemoryImage,
-                  fit: BoxFit.cover,
+                child: Hero(
+                  tag: lMemoryImage, // Unique tag for each image
+                  child: Image(
+                    image: lMemoryImage,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
