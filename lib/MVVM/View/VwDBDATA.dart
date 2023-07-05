@@ -30,12 +30,7 @@ class VwDBData extends StatelessWidget {
           MemoryImage lMemoryImage = l_VmDBData.FncConvertImage(lListindex);
           return GestureDetector(
             onTap: () {
-              List<MemoryImage> l_ConvertedImagesList = l_VmDBData.FncConvertImages();
-              Get.to(() => VwImageDetailScreen(
-                image: lMemoryImage,
-                l_imagesList: l_ConvertedImagesList,
-                initialIndex: lListindex,
-              ));
+              Get.to(() => VwImageDetailScreen(image: lMemoryImage,));
             },
             onLongPress: () {
               l_VmDBData.FncSelectedImageValue(lListindex);

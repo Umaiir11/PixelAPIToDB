@@ -42,7 +42,7 @@ class VwApiImages extends StatelessWidget {
             return GestureDetector(
             onTap: () {
               // Handle the tap event here
-              Get.to(() => VwImageDetailScreen(image: image, l_imagesList:controller.l_memoryImages, initialIndex: lListindex,));
+              Get.to(() => VwImageDetailScreen(image: image));
 
             },
             child: Container(
