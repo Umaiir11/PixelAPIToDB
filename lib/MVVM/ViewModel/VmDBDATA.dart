@@ -18,6 +18,7 @@ int? l_SelectedIndex;
 
   Future<bool> FetchDB_DATA() async {
     List<ModDBImage> lListmoddefinecustomer = await DAL_APIImage().Fnc_Read();
+    l_RxListModImage.clear(); // Clear the list before adding the fetched data
     l_RxListModImage.addAll(lListmoddefinecustomer);
     return true;
   }
@@ -74,6 +75,13 @@ int? l_SelectedIndex;
     return isSuccess;
   }
 
+
+   FncDeleteImage(int selectedIndex) {
+    // Remove the image at the selected index from the list
+    if (l_RxListModImage != null && selectedIndex >= 0 && selectedIndex < l_RxListModImage.length) {
+      l_RxListModImage.removeAt(selectedIndex);
+    }
+  }
 
   }
 

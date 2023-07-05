@@ -10,6 +10,7 @@ import 'VwImageDetailScreen.dart';
 class VwDBData extends StatelessWidget {
   final VmDBData l_VmDBData = Get.put(VmDBData());
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,6 +87,7 @@ class VwDBData extends StatelessWidget {
               child: Text('Yes'),
               onPressed: () {
                 // Perform delete operation here
+                l_VmDBData.FncDeleteImage(l_VmDBData.l_SelectedIndex!);
                 l_VmDBData.BTNDelete_Click();
                 Navigator.of(context).pop();
               },
