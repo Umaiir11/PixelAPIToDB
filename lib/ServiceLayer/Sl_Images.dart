@@ -7,7 +7,7 @@ import '../MVVM/Model/ApiModel/ModImage.dart';
 class Sl_ImagesList {
   Future<List<Photo>> Fnc_Images() async {
     try {
-      final lResponse = await cmHttpCalls().Fnc_HttpWeb('/v1/search?query=nature&per_page=2');
+      final lResponse = await cmHttpCalls().Fnc_HttpWeb('/v1/search?query=nature&per_page=5');
       if (lResponse.statusCode == 200) {
         Map<String, dynamic> jsonResponse = jsonDecode(lResponse.body);
         return Fnc_JsonToModel(jsonResponse);

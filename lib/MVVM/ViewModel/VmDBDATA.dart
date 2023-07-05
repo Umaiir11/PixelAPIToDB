@@ -63,15 +63,14 @@ int? l_SelectedIndex;
     }
 
     String? l_image = l_RxListModImage[l_SelectedIndex!].Pr_listImages;
-    List<ModDBImage>? lModDBImageList = l_VmHome.Fnc_SetModel_DATA();
+    List<ModDBImage> lModDBImageList = [];
 
-    if (lModDBImageList == null || lModDBImageList.isEmpty) {
-      return false; // or handle the error in an appropriate way
-    }
+    ModDBImage selectedModel = l_VmHome.Fnc_SetModel_DATA()![l_SelectedIndex!];
+    selectedModel.Pr_listImages = l_image;
 
-    lModDBImageList[l_SelectedIndex!].Pr_listImages = l_image;
+    lModDBImageList.add(selectedModel);
 
-    bool isSuccess = await DAL_APIImage().Fnc_Cud(lModDBImageList!);
+    bool isSuccess = await DAL_APIImage().Fnc_Cud(lModDBImageList);
     return isSuccess;
   }
 

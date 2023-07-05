@@ -17,7 +17,7 @@ Future<Database?> FncGetDatabaseIns() async {
     final appDirectory = await getApplicationDocumentsDirectory();
     final dbDirectory = Directory('${appDirectory.path}/Database');
     await dbDirectory.create(recursive: true);
-    final dbPath = path.join(dbDirectory.path, 'APPImages2.db');
+    final dbPath = path.join(dbDirectory.path, 'APPImages3.db');
     final databaseExists = await databaseFactory.databaseExists(dbPath);
     if (!databaseExists) {
       l_Database = await openDatabase(
