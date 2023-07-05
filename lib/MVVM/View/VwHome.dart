@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:image_list/MVVM/ViewModel/VmDBDATA.dart';
 import 'package:image_list/MVVM/ViewModel/VmHome.dart';
 import 'package:image_list/cmModule/DbHelper/DbHelperClass.dart';
 
@@ -16,6 +17,7 @@ class VwHome extends StatefulWidget {
 class _VwHomeState extends State<VwHome> {
   @override
   final  l_VmHome = Get.put(VmHome());
+  final l_VmDBData =   Get.put(VmDBData());
 
   void initState() {
     // TODO: implement initState
@@ -70,7 +72,7 @@ class _VwHomeState extends State<VwHome> {
               Center(
                 child: ElevatedButton(
                     onPressed: () {
-                      l_VmHome.BTNFetch();
+                     l_VmDBData.BTNFetch();
 
                       Get.toNamed(AppRoutes.VwDBData);
                     },

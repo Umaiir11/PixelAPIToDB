@@ -17,7 +17,6 @@ class VmHome extends GetxController {
   List<Photo>? l_listImages;
   int? G_Operation;
   RxList<String> l_Base64Images = <String>[].obs;
-  RxList<ModDBImage> l_RxListModImage = <ModDBImage>[].obs;
   RxList<MemoryImage> l_memoryImages = <MemoryImage>[].obs;
 
 
@@ -118,16 +117,7 @@ class VmHome extends GetxController {
     G_Operation = 1;
   }
 
-  Future<void> BTNFetch() async {
-    await FetchDB_DATA();
-  }
 
-
-  Future<bool> FetchDB_DATA() async {
-    List<ModDBImage> lListmoddefinecustomer = await DAL_APIImage().Fnc_Read();
-    l_RxListModImage.addAll(lListmoddefinecustomer);
-    return true;
-  }
 
 
   BTNApiFetchImages() async {

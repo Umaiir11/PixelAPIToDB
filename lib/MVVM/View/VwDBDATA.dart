@@ -4,15 +4,17 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:image_list/MVVM/ViewModel/VmDBDATA.dart';
 
 import '../ViewModel/VmHome.dart';
 import 'VwImageDetailScreen.dart';
 
 class VwDBData extends StatelessWidget {
-  final VmHome l_VmDBData = Get.put(VmHome());
+  final VmDBData l_VmDBData = Get.put(VmDBData());
 
   @override
   Widget build(BuildContext context) {
+    List<MemoryImage> l_ConvertedImagesList = l_VmDBData.FncConvertImages();
     return Scaffold(
       appBar: AppBar(
         title: Text('Image List'),
@@ -27,11 +29,7 @@ class VwDBData extends StatelessWidget {
           childAspectRatio: 0.75,
         ),
         itemBuilder: (context, lListindex) {
-          final item = l_VmDBData.l_RxListModImage[lListindex];
-          String l_ListImage = item.Pr_listImages!;
-          Uint8List l_DecodedBytes = base64Decode(l_ListImage);
-          MemoryImage lMemoryImage = MemoryImage(l_DecodedBytes);
-
+          MemoryImage lMemoryImage = l_VmDBData.FncConvertImage(lListindex);
           return GestureDetector(
             onTap: () {
               List<MemoryImage> l_converttedimages = l_VmDBData.l_RxListModImage.map((item) {
