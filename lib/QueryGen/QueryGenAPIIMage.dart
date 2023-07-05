@@ -21,18 +21,25 @@ class QueryGenImageApi {
   }
 
 
-  Future<String> FncGenCrudQueriesApiImage(ModDBImage l_ModSingleMulti) async {
+  Future<String> FncGenCrudQueriesApiImage(ModDBImage l_ModDBImage) async {
     try {
 
-      switch (l_ModSingleMulti.Pr_Operation) {
+      switch (l_ModDBImage.Pr_Operation) {
         case DBOPP.insert:
           return '''
             INSERT INTO TBU_ApiImage (
              Image,ISD
             ) VALUES (
-              '${l_ModSingleMulti.Pr_listImages}','false'
+              '${l_ModDBImage.Pr_listImages}','false'
             )
           ''';
+        case DBOPP.delete:
+        // Delete operation based on PKGUID
+          final String lWhereclause = "WHERE Image = '${l_ModDBImage.Pr_listImages}'";
+          return '''
+          UPDATE TBU_ApiImage
+          SET ISD = 'true' $lWhereclause
+        ''';
 
 
         default:

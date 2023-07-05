@@ -7,7 +7,6 @@ import 'package:image_list/MVVM/Model/DbModel/ModDBIMages.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../DAL/DAL_APIImages.dart';
-import '../../DAL/DAL_Image.dart';
 import '../../ServiceLayer/Sl_Images.dart';
 import '../Model/ApiModel/ModImage.dart';
 import 'dart:convert';
@@ -101,17 +100,17 @@ class VmHome extends GetxController {
   }
 
 
-  Future<bool> Fnc_CUD() async {
+    Future<bool> Fnc_CUD() async {
 
-   if (await Fnc_ImagesAPICall() == true ){
-     List<ModDBImage>? lModDBImageList = Fnc_SetModel_DATA();
-     if (await DAL_APIImage().Fnc_Cud(lModDBImageList!)== true) {
-       return true;
+     if (await Fnc_ImagesAPICall() == true ){
+       List<ModDBImage>? lModDBImageList = Fnc_SetModel_DATA();
+       if (await DAL_APIImage().Fnc_Cud(lModDBImageList!)== true) {
+         return true;
+       }
      }
-   }
 
-    return false;
-  }
+      return false;
+    }
 
   Sb_ResetForm() {
     G_Operation = 1;

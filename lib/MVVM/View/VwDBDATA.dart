@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:image_list/MVVM/ViewModel/VmDBDATA.dart';
-
-import '../ViewModel/VmHome.dart';
 import 'VwImageDetailScreen.dart';
 
 class VwDBData extends StatelessWidget {
@@ -14,7 +12,6 @@ class VwDBData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Image List'),
@@ -38,6 +35,10 @@ class VwDBData extends StatelessWidget {
                 l_imagesList: l_ConvertedImagesList,
                 initialIndex: lListindex,
               ));
+            },
+            onLongPress: () {
+              l_VmDBData.FncSelectedImageValue(lListindex);
+              _WidgetshowDeleteConfirmationDialog(context);
             },
             child: Container(
               decoration: BoxDecoration(
@@ -64,6 +65,34 @@ class VwDBData extends StatelessWidget {
           );
         },
       )),
+    );
+  }
+
+  void _WidgetshowDeleteConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Delete Image'),
+          content: Text('Are you sure you want to delete this image?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Yes'),
+              onPressed: () {
+                // Perform delete operation here
+                l_VmDBData.BTNDelete_Click();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
