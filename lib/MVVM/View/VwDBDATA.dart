@@ -14,7 +14,7 @@ class VwDBData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<MemoryImage> l_ConvertedImagesList = l_VmDBData.FncConvertImages();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Image List'),
@@ -32,15 +32,10 @@ class VwDBData extends StatelessWidget {
           MemoryImage lMemoryImage = l_VmDBData.FncConvertImage(lListindex);
           return GestureDetector(
             onTap: () {
-              List<MemoryImage> l_converttedimages = l_VmDBData.l_RxListModImage.map((item) {
-                String lListItem = item.Pr_listImages!;
-                Uint8List lDecodedBytes = base64Decode(lListItem);
-                return MemoryImage(lDecodedBytes);
-              }).toList();
-
+              List<MemoryImage> l_ConvertedImagesList = l_VmDBData.FncConvertImages();
               Get.to(() => VwImageDetailScreen(
                 image: lMemoryImage,
-                l_imagesList: l_converttedimages,
+                l_imagesList: l_ConvertedImagesList,
                 initialIndex: lListindex,
               ));
             },
