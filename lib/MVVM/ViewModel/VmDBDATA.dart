@@ -58,16 +58,22 @@ int? l_SelectedIndex;
 
 
   Future<bool> Fnc_CUD() async {
+    if (l_SelectedIndex == null) {
+      return false; // or handle the error in an appropriate way
+    }
 
     String? l_image = l_RxListModImage[l_SelectedIndex!].Pr_listImages;
-      List<ModDBImage>? lModDBImageList = l_VmHome.Fnc_SetModel_DATA();
-    lModDBImageList![l_SelectedIndex!].Pr_listImages = l_image;
+    List<ModDBImage>? lModDBImageList = l_VmHome.Fnc_SetModel_DATA();
 
-      if (await DAL_APIImage().Fnc_Cud(lModDBImageList!)== true) {
-        return true;
-      }
-      return false;
+    if (lModDBImageList == null || lModDBImageList.isEmpty) {
+      return false; // or handle the error in an appropriate way
     }
+
+    lModDBImageList[l_SelectedIndex!].Pr_listImages = l_image;
+
+    bool isSuccess = await DAL_APIImage().Fnc_Cud(lModDBImageList!);
+    return isSuccess;
+  }
 
 
   }
